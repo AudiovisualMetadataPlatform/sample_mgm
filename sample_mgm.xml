@@ -1,0 +1,21 @@
+<!-- For more information about the format of this file:
+     https://docs.galaxyproject.org/en/latest/dev/schema.html
+  -->
+<tool id="sample_mgm" name="Generate Waveform" version="1.0.0">
+  <description>Create a waveform image from audio data</description>
+  <command detect_errors="exit_code">
+    '$__tool_directory__/sample_mgm.py' '$audio' '$waveform' --color '$color'
+  </command>
+  <inputs>
+    <param name="audio" type="data" format="av" label="Audio Data" help="Audio that will be converted to an image"/>
+    <param name="color" type="color" label="Waveform Color" value='#0060ad' help="Color of the waveform"/>
+  </inputs>
+  <outputs>
+    <data name="waveform" format="png" label="Image of Waveform"/>
+  </outputs>
+  <help>  
+  This text appears in the right hand column during the workflow edit.  It serves
+  as a longer text description for the tool
+  
+  </help>
+</tool>

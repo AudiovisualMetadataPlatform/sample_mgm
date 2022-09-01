@@ -1,0 +1,16 @@
+# This file allows a package to inject configuration into the
+# amp default configuration.
+#
+# In this case we're going to set a watermark on the waveform plot
+# that's site-defined.  Since this is an MGM we'll want to put the
+# configuration in the "sample_mgm" section of the toplevel "mgms" 
+# section.
+#
+# A user can override this value in the installation's amp.yaml file
+# by setting it to something else and it will overlay this default
+# value.
+---
+mgms:
+  sample_mgm:
+    watermark: This is the default watermark
+
