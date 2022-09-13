@@ -4,7 +4,6 @@ from amp.package import *
 import argparse
 import logging
 from pathlib import Path
-import subprocess
 import sys
 import tempfile
 import shutil
@@ -60,22 +59,20 @@ def main():
     # Package it, if needed
     if args.package:
         try:
-            new_package = create_package(Path(args.destination), destdir / installation_path,
-                                         metadata={'name': 'sample_mgm', 
-                                                   'version': '1.0', 
-                                                   'install_path': installation_path},
-                                         # install all of the hooks, just to show how it's done
-                                         hooks={'pre': 'pre_script.py',
-                                                'post': 'post_script.py',
-                                                'config': 'config_script.py'},
-                                         # we're also extending the configuration
-                                         # so we need to let the packager know 
-                                         defaults=Path("sample_mgm.default"),
-                                         # There's nothing here that is architecture specific
-                                         arch_specific=False,
-                                         # specify which packages we require to be installed
-                                         # can also be a list.
-                                         depends_on='galaxy')
+            new_package = create_package("sample_mgm", "1.0", installation_path,
+                                Path(args.destination), destdir / installation_path,
+                                # install all of the hooks, just to show how it's done
+                                hooks={'pre': 'pre_script.py',
+                                    'post': 'post_script.py',
+                                    'config': 'config_script.py'},
+                                # we're also extending the configuration
+                                # so we need to let the packager know 
+                                user_defaults=Path("sample_mgm.default"),
+                                # There's nothing here that is architecture specific
+                                arch_specific=False,
+                                # specify which packages we require to be installed
+                                # can also be a list.
+                                depends_on='galaxy')
             logging.info(f"New package in {new_package}")    
         except Exception as e:
             logging.error(f"Failed to build backage: {e}")
